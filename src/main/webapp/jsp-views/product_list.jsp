@@ -15,10 +15,10 @@
         <c:forEach items="${productList}" var="product">
         <div id="container">
             <div id="left">
-                <a href="/product/${product.id}"> ${product.title} | ${product.price} / ${product.unit} </a> <br>
+                <a href="/product/${}"></a>
             </div>
             <div id="right">
-                <img src="${product.mainPhoto}" alt= "${product.title}"  width="100px" height="70px">
+                <img src= alt=  width="100px" height="70px">
             </div>
         </div>
         </c:forEach>

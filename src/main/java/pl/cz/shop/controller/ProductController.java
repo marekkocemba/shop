@@ -12,18 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class ProductController {
 
-    private final ProductService productService;
-
-    @Autowired
-    public ProductController(ProductService productService){
-        this.productService = productService;
-    }
-
     @GetMapping("/products")
-    private String getUserList(HttpServletRequest request, Model model) {
-        User user = (User) request.getSession().getAttribute("user");
-        System.out.println(user == null ? "null" : user.getLogin());
-        model.addAttribute("productList", productService.getProductList());
+    private String getUserList(Model model) {
+       
         return "product_list";
     }
 }

@@ -22,12 +22,12 @@ public class UserController {
     @GetMapping("/users/login")
     private String getUserList(HttpServletRequest request, Model model) {
 
-        String login = request.getParameter("login");
-
-        System.out.println(login);
-        User user = userService.getUserByLogin(login);
-        System.out.println(user.getLogin()+user.getPassword());
-        request.getSession().setAttribute("user",user);
+//        String login = request.getParameter("login");
+//
+//        System.out.println(login);
+//        User user = userService.getUserByLogin(login);
+//        System.out.println(user.getLogin()+user.getPassword());
+//        request.getSession().setAttribute("user",user);
         return "user_list";
     }
 
