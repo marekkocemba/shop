@@ -12,6 +12,7 @@
 	</head>
 	<body>
 		<h3>Lista produktów</h3>
+		<a href="/products/form">Dodaj nowy produkt</a>
         <c:forEach items="${naszaListaProduktow}" var="productElement">
         <div id="container">
             <div id="left">

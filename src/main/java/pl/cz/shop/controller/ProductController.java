@@ -3,13 +3,14 @@ package pl.cz.shop.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import pl.cz.shop.dto.ProductDto;
 import pl.cz.shop.entity.Product;
 import pl.cz.shop.enums.ProductUnitEnum;
 import pl.cz.shop.service.ProductService;
+
+import javax.validation.Valid;
 
 //@Controller @Service @Repository @Component @Configuration @Bean
 
@@ -39,5 +40,19 @@ public class ProductController {
         model.addAttribute("product", productService.getProductById(id));
         return "product_details";
        // propozycja :  model.addAttribute("imageList", imageService.getImagesByProductId);
+    }
+
+    @GetMapping("/products/form")
+    private String getProductForm(Model model){
+
+        model.addAttribute("product", new Product());
+
+        return "product_form";
+    }
+
+    @PostMapping("/products")
+    private String saveProduct(@ModelAttribute("product") Product product,
+            Model model){
+        return "product_list";
     }
 }

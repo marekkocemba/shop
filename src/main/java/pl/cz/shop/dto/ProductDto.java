@@ -1,24 +1,17 @@
-package pl.cz.shop.entity;
+package pl.cz.shop.dto;
 
 import pl.cz.shop.enums.ProductUnitEnum;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 
-@Entity
-@Table(name = "products")
-public class Product {
+public class ProductDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String description;
     private Double price;
-    @Enumerated(EnumType.STRING)
     private ProductUnitEnum unit;
-    @Column(name = "main_photo")
     private String mainPhoto;
 
     public Long getId() {
