@@ -1,5 +1,7 @@
 package pl.cz.shop.entity;
 
+import pl.cz.shop.enums.ProductUnitEnum;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,7 +14,8 @@ public class Product {
     private String title;
     private String description;
     private Double price;
-    private String unit;
+    @Enumerated(EnumType.STRING)
+    private ProductUnitEnum unit;
     @Column(name = "main_photo")
     private String mainPhoto;
 
@@ -48,19 +51,19 @@ public class Product {
         this.price = price;
     }
 
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
     public String getMainPhoto() {
         return mainPhoto;
     }
 
     public void setMainPhoto(String mainPhoto) {
         this.mainPhoto = mainPhoto;
+    }
+
+    public ProductUnitEnum getUnit() {
+        return unit;
+    }
+
+    public void setUnit(ProductUnitEnum unit) {
+        this.unit = unit;
     }
 }

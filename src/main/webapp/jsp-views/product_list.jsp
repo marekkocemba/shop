@@ -15,13 +15,12 @@
         <c:forEach items="${naszaListaProduktow}" var="productElement">
         <div id="container">
             <div id="left">
-                <a href="/product/${productElement.id}">${productElement.title}</a>
+                <a href="/products/${productElement.id}">${productElement.title}</a>
             </div>
             <div id="right">
                 <img src="${productElement.mainPhoto}" alt="${productElement.title}"  width="100px" height="70px">
             </div>
         </div>
         </c:forEach>
-setMainPhoto
     </body>
 </html>
