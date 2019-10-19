@@ -12,16 +12,16 @@
 	</head>
 	<body>
 		<h3>Lista produktów</h3>
-        <c:forEach items="${productList}" var="product">
+        <c:forEach items="${naszaListaProduktow}" var="productElement">
         <div id="container">
             <div id="left">
-                <a href="/product/${}"></a>
+                <a href="/product/${productElement.id}">${productElement.title}</a>
             </div>
             <div id="right">
-                <img src= alt=  width="100px" height="70px">
+                <img src="${productElement.mainPhoto}" alt="${productElement.title}"  width="100px" height="70px">
             </div>
         </div>
         </c:forEach>
-
+setMainPhoto
     </body>
 </html>
