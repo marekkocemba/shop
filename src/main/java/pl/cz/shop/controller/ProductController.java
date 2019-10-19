@@ -53,6 +53,13 @@ public class ProductController {
     @PostMapping("/products")
     private String saveProduct(@ModelAttribute("product") Product product,
             Model model){
-        return "product_list";
+        try {
+            productService.saveProduct(product);
+            model.addAttribute("naszaListaProduktow", productService.getProducts());
+            return "product_list";
+        }catch (Exception e){
+            model.addAttribute("product", product);
+            return "product_form";
+        }
     }
 }

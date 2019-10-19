@@ -29,4 +29,9 @@ public class ProductService {
                 () -> new RuntimeException("Product not found by id: "+ id)
         );
     }
+
+    public Product saveProduct(Product product){
+        //tak naprawde powinien to być dtos
+        return productRepository.save(product);
+    }
 }

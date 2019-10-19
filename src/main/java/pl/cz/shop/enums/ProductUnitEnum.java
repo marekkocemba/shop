@@ -1,5 +1,5 @@
 package pl.cz.shop.enums;
 
 public enum ProductUnitEnum {
-    gram,dekagram,kilogram,sztuka
+    a,gram,dekagram,kilogram,sztuka
 }
