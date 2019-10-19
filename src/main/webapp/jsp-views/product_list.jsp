@@ -12,16 +12,23 @@
 	</head>
 	<body>
 		<h3>Lista produktów</h3>
-		<a href="/products/form">Dodaj nowy produkt</a>
-        <c:forEach items="${naszaListaProduktow}" var="productElement">
-        <div id="container">
-            <div id="left">
-                <a href="/products/${productElement.id}">${productElement.title}</a>
+		<a href="/products/form/create">Dodaj nowy produkt</a>
+        <c:choose>
+        <c:when test = "${not empty naszaListaProduktow}">
+            <c:forEach items="${naszaListaProduktow}" var="productElement">
+            <div id="container">
+                <div id="left">
+                    <a href="/products/${productElement.id}">${productElement.title}</a>
+                </div>
+                <div id="right">
+                    <img src="${productElement.mainPhoto}" alt="${productElement.title}"  width="100px" height="70px">
+               </div>
             </div>
-            <div id="right">
-                <img src="${productElement.mainPhoto}" alt="${productElement.title}"  width="100px" height="70px">
-            </div>
-        </div>
-        </c:forEach>
+            </c:forEach>
+        </c:when>
+        <c:otherwise>
+        <h3>Brak produktów w bazie</h3>
+        </c:otherwise>
+        </c:choose>
     </body>
 </html>

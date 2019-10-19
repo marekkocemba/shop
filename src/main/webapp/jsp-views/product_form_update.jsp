@@ -21,7 +21,6 @@
                 <tr>
                     <td><form:label path="title">Nazwa produktu</form:label></td>
                     <td><form:input path="title"/></td>
-                     <td class='error'><form:errors path="title"/></td>
                 </tr>
                 <tr>
                     <td><form:label path="description">Opis produktu</form:label></td>
@@ -37,10 +36,17 @@
                 </tr>
                 <tr>
                     <td><form:label path="unit">Jednostka</form:label></td>
-                     <td><form:input path="unit"/></td>
+                     <td>
+                     <form:select path="unit">
+                        <option value="${product.unit}" selected>${product.unit}</option>
+                            <c:forEach items="${unitEnums}" var="unitElement">
+                                <option value="${unitElement}">${unitElement}</option>
+                            </c:forEach>
+                        </form:select>
+                     </td>
                 </tr>
                 <tr>
-                	<td></td>
+                	<td><form:hidden path="id" /></td>
                     <td><input type="submit" value="OK"/></td>
                 </tr>
             </table>

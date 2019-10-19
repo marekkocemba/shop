@@ -17,5 +17,7 @@
                 Opis produktu: ${product.description} <br>
                 Cena : ${product.price} / ${product.unit}
         </div>
+        <a href="/products/form/${product.id}">Edytuj produkt</a>
+        <a href="/products-delete/${product.id}">Usuń produkt</a>
     </body>
 </html>

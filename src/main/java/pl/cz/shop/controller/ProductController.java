@@ -42,12 +42,22 @@ public class ProductController {
        // propozycja :  model.addAttribute("imageList", imageService.getImagesByProductId);
     }
 
-    @GetMapping("/products/form")
+    @GetMapping("/products/form/create")
     private String getProductForm(Model model){
 
         model.addAttribute("product", new Product());
+        model.addAttribute("unitEnums", ProductUnitEnum.values());
 
-        return "product_form";
+        return "product_form_create";
+    }
+
+    @GetMapping("/products/form/{id}")
+    private String updateProduct(@PathVariable("id") Long id, Model model){
+
+        model.addAttribute("product", productService.getProductById(id));
+        model.addAttribute("unitEnums", ProductUnitEnum.values());
+
+        return "product_form_update";
     }
 
     @PostMapping("/products")
@@ -61,5 +71,13 @@ public class ProductController {
             model.addAttribute("product", product);
             return "product_form";
         }
+    }
+
+    @GetMapping("products-delete/{id}")
+    private String deleteProduct(@PathVariable("id") Long id, Model model){
+
+        productService.deleteProduct(id);
+        model.addAttribute("naszaListaProduktow", productService.getProducts());
+        return "product_list";
     }
 }

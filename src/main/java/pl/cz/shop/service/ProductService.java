@@ -34,4 +34,11 @@ public class ProductService {
         //tak naprawde powinien to być dtos
         return productRepository.save(product);
     }
+
+    public void deleteProduct(Long id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("no product found by id (delete): "+id));
+        productRepository.delete(product);
+        //productRepository.deleteById(id);
+    }
 }
