@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = "shop_users")
@@ -31,6 +32,9 @@ public class User {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private UserPriviledgeEnum userPriviledge;//tak dla wiadomosci literowka, powinno byc privilege, szkoda czasu na przerobke kodu
+
+    @OneToMany(mappedBy="user")
+    private List<Commentary> commentaryList;
 
     public User(UserDto userDto) {
         this.email = userDto.getEmail();
@@ -97,5 +101,13 @@ public class User {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    public List<Commentary> getCommentaryList() {
+        return commentaryList;
+    }
+
+    public void setCommentaryList(List<Commentary> commentaryList) {
+        this.commentaryList = commentaryList;
     }
 }

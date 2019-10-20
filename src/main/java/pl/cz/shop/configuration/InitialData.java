@@ -2,24 +2,29 @@ package pl.cz.shop.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import pl.cz.shop.entity.Commentary;
 import pl.cz.shop.entity.Product;
 import pl.cz.shop.entity.User;
 import pl.cz.shop.enums.ProductUnitEnum;
 import pl.cz.shop.enums.UserPriviledgeEnum;
 import pl.cz.shop.enums.UserStatus;
+import pl.cz.shop.repository.CommentaryRepository;
 import pl.cz.shop.repository.ProductRepository;
 import pl.cz.shop.repository.UserRepository;
 
 import javax.annotation.PostConstruct;
+import java.time.LocalDateTime;
 
 @Configuration
 public class InitialData {
 
+        private final CommentaryRepository commentaryRepository;
         private final ProductRepository productRepository;
         private final UserRepository userRepository;
 
         @Autowired //juz nie jest potrzebne
-        public InitialData(ProductRepository productRepository, UserRepository userRepository) {
+        public InitialData(CommentaryRepository commentaryRepository, ProductRepository productRepository, UserRepository userRepository) {
+            this.commentaryRepository = commentaryRepository;
 
             this.productRepository = productRepository;
             this.userRepository = userRepository;
@@ -28,11 +33,10 @@ public class InitialData {
         @PostConstruct
         public void setObjects() {
 
-            setProduct();
-            setUsers();
+            setData();
         }
 
-        public void setProduct() {
+        public void setData() {
 
             Product product = new Product();
             product.setTitle("Pomarańcze");
@@ -58,9 +62,6 @@ public class InitialData {
             productRepository.save(product);
             productRepository.save(product2);
             productRepository.save(product3);
-        }
-
-        private void setUsers() {
 
             User user1 = new User();
             user1.setEmail("admin");
@@ -70,5 +71,22 @@ public class InitialData {
             user1.setUserPriviledge(UserPriviledgeEnum.ADMIN);
             user1.setStatus(UserStatus.ACTIVE);
             userRepository.save(user1);
+
+            User user2 = new User();
+            user2.setEmail("marekkocembapos@gmail.com");
+            user2.setPassword("admin");
+            user2.setAddress("some address");
+            user2.setTelephone("1234567");
+            user2.setUserPriviledge(UserPriviledgeEnum.CUSTOMER);
+            user2.setStatus(UserStatus.ACTIVE);
+            userRepository.save(user2);
+
+            Commentary commentary = new Commentary();
+            commentary.setText("nie wiem jak to skomentować");
+            commentary.setPublishDate(LocalDateTime.now());
+            commentary.setUser(user2);
+            commentary.setProduct(product);
+
+            commentaryRepository.save(commentary);
         }
     }

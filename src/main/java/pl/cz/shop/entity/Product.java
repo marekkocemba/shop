@@ -6,6 +6,7 @@ import pl.cz.shop.enums.ProductUnitEnum;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -21,6 +22,8 @@ public class Product {
     private ProductUnitEnum unit;
     @Column(name = "main_photo")
     private String mainPhoto;
+    @OneToMany(mappedBy="product")
+    private List<Commentary> commentaryList;
 
     public Product(ProductDto productDto) {
         this.id = productDto.getId();
@@ -80,5 +83,13 @@ public class Product {
 
     public void setUnit(ProductUnitEnum unit) {
         this.unit = unit;
+    }
+
+    public List<Commentary> getCommentaryList() {
+        return commentaryList;
+    }
+
+    public void setCommentaryList(List<Commentary> commentaryList) {
+        this.commentaryList = commentaryList;
     }
 }

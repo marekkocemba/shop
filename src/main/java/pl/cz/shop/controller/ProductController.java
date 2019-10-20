@@ -38,6 +38,7 @@ public class ProductController {
     private String getProductById(@PathVariable("id") Long id, Model model) {
 
         model.addAttribute("product", productService.getProductById(id));
+
         return "product_details";
        // propozycja :  model.addAttribute("imageList", imageService.getImagesByProductId);
     }
@@ -47,7 +48,6 @@ public class ProductController {
 
         model.addAttribute("product", new ProductDto());
         model.addAttribute("unitEnums", ProductUnitEnum.values());
-
         return "product_form_create";
     }
 
