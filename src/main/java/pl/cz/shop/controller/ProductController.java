@@ -32,6 +32,7 @@ public class ProductController {
 
         model.addAttribute("naszaListaProduktow", productService.getProducts());
         return "product_list";
+
     }
 
     @GetMapping("/products/{id}")
