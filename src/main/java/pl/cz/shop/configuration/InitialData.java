@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import pl.cz.shop.entity.Product;
 import pl.cz.shop.entity.User;
 import pl.cz.shop.enums.ProductUnitEnum;
+import pl.cz.shop.enums.UserPriviledgeEnum;
+import pl.cz.shop.enums.UserStatus;
 import pl.cz.shop.repository.ProductRepository;
 import pl.cz.shop.repository.UserRepository;
 
@@ -61,9 +63,12 @@ public class InitialData {
         private void setUsers() {
 
             User user1 = new User();
-            user1.setLogin("admin");
+            user1.setEmail("admin");
             user1.setPassword("admin");
-
+            user1.setAddress("some address");
+            user1.setTelephone("1234567");
+            user1.setUserPriviledge(UserPriviledgeEnum.ADMIN);
+            user1.setStatus(UserStatus.ACTIVE);
             userRepository.save(user1);
         }
     }

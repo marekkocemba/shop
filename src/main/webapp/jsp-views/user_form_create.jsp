@@ -33,6 +33,16 @@
                     <td><form:label path="repeatPassword">Hasło</form:label></td>
                     <td><form:input path="repeatPassword"/></td>
                 </tr>
+                 <tr>
+                     <td><form:label path="telephone">Telephone</form:label></td>
+                     <td><form:input path="telephone"/></td>
+                     <td class='error'><form:errors path="telephone"/></td>
+                 </tr>
+                 <tr>
+                     <td><form:label path="address">Address</form:label></td>
+                     <td><form:input path="address"/></td>
+                     <td class='error'><form:errors path="address"/></td>
+                 </tr>
                 <tr>
                 	<td></td>
                     <td><input type="submit" value="OK"/></td>

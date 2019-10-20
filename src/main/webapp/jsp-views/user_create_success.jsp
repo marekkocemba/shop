@@ -7,8 +7,9 @@
 	</head>
 	<body>
 		<h3>Gratulacje dodałeś nowego użytkownika</h3>
-                Login: ${user.login} <br>
-                Id: ${user.id} (w prawdziwym sklepie nie do przyjecia)<br>
+                Email: ${persistedUser.email} <br>
+                Telefon: ${persistedUser.telephone} <br>
+                Address: ${persistedUser.address} <br>
                  <a href="/products">Powrót na listę produktów</a>
 
     </body>

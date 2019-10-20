@@ -1,5 +1,5 @@
 package pl.cz.shop.enums;
 
 public enum UserStatus {
-    EMAIL_UNCONFIRMED, ACTIVE, BLOCKED, REMOVED
+    SMS_UNCONFIRMED, ACTIVE, BLOCKED, REMOVED
 }

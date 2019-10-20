@@ -1,8 +1,10 @@
 package pl.cz.shop.service;
 
 import org.springframework.stereotype.Service;
+import pl.cz.shop.dto.UserDto;
 import pl.cz.shop.entity.User;
 import pl.cz.shop.enums.UserPriviledgeEnum;
+import pl.cz.shop.enums.UserStatus;
 import pl.cz.shop.repository.UserRepository;
 
 @Service
@@ -15,20 +17,16 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User saveUser(User user) {
+    public UserDto saveUser(UserDto userDto) {
 
-        checkForUserLoginExists(user.getLogin());
-        checkForUserEmailExists(user.getEmail());
+        checkForUserEmailExists(userDto.getEmail());
 
+        User user = new User(userDto); //mapper
+
+        user.setStatus(UserStatus.SMS_UNCONFIRMED);
         user.setUserPriviledge(UserPriviledgeEnum.CUSTOMER);
 
-        return  userRepository.save(user);
-    }
-
-    private void checkForUserLoginExists(String login) {
-        if(userRepository.findByLogin(login).isPresent()){
-            throw new RuntimeException("login already exists");
-        }
+        return  new UserDto(user);
     }
 
     private void checkForUserEmailExists(String email) {

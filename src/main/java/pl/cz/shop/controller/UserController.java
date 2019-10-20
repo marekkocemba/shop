@@ -33,7 +33,7 @@ public class UserController {
 
     @PostMapping("/users")
     public String saveUsers(@ModelAttribute("userDto") UserDto userDto, Model model, BindingResult result) {
-       // ObjectError oe = new ObjectError();
+        // ObjectError oe = new ObjectError();
 
         if (userDto != null) {
             userValidator.validate(userDto, result);
@@ -42,15 +42,12 @@ public class UserController {
         if (result.hasErrors()) {
             return "user_form_create";
         }
-        try {
-         //   User persistedUser = userService.saveUser(user);
-           // model.addAttribute("naszaListaProduktow", productService.getProducts());
-            return "user_create_success";
-        }catch (Exception e){
-          //  model.addAttribute("user", user);
-            return "user_form_create";
-        }
+
+        UserDto persistedUserDto = userService.saveUser(userDto);
+        model.addAttribute("persistedUser", persistedUserDto);
+        return "user_create_success";
     }
+
 
     @GetMapping("/users/login")
     private String getUserList(HttpServletRequest request, Model model) {
