@@ -1,17 +1,13 @@
 package pl.cz.shop.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.cz.shop.dto.ProductDto;
-import pl.cz.shop.entity.Product;
 import pl.cz.shop.enums.ProductUnitEnum;
 import pl.cz.shop.service.ProductService;
 import pl.cz.shop.validator.ProductValidator;
-
-import javax.validation.Valid;
 
 //@Controller @Service @Repository @Component @Configuration @Bean
 
@@ -21,12 +17,13 @@ public class ProductController {
     // Czeste pytanie podczas rozmowy jak są wstrykiwane zaleznosci w Springu
     // Odp: Przez pole, konstruktor i metode
 
-    private ProductService productService;
-    private ProductValidator productValidator;
+    private final ProductService productService;
+    private final ProductValidator productValidator;
 
     //@Autowired nie jest to potrzebne
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, ProductValidator productValidator) {
         this.productService = productService;
+        this.productValidator = productValidator;
     }
 
     @GetMapping("/products")

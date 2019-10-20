@@ -26,7 +26,7 @@ public class Product {
         this.id = productDto.getId();
         this.title = productDto.getTitle();
         this.description = productDto.getDescription();
-        this.price = productDto.getPrice();
+        this.price = Double.parseDouble(productDto.getPrice()); // troche słabe to jest
         this.unit = productDto.getUnit();
         this.mainPhoto = productDto.getMainPhoto();
     }

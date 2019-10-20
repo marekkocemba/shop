@@ -27,7 +27,7 @@
                     <td><form:input path="description"/></td>
                 </tr>
                 <tr>
-                    <td><form:label path="mainPhoto">Opis produktu</form:label></td>
+                    <td><form:label path="mainPhoto">Foto</form:label></td>
                     <td><form:input path="mainPhoto"/></td>
                 </tr>
                 <tr>

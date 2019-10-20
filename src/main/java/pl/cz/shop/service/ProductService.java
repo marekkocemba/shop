@@ -7,6 +7,7 @@ import pl.cz.shop.repository.ProductRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -18,24 +19,27 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public List<Product> getProducts() {
+    public List<ProductDto> getProducts() {
 
-        return productRepository.findAll();
+        return productRepository.findAll().stream()
+                .map(ProductDto::new) // to samo .map(product -> new ProductDto(product))
+                // jako ciekawostka .filter(productDto -> !productDto.getDescription().contains("ku!@#"))
+                .collect(Collectors.toList());
     }
 
-    public Product getProductById(Long id){
+    public ProductDto getProductById(Long id){
 
         //uwaga na optionale findById to optional, get to product
-        return productRepository.findById(id).orElseThrow(
+        Product product = productRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("Product not found by id: "+ id)
         );
+        return new ProductDto(product);
     }
 
-    public Product saveProduct(ProductDto productDto){
-        //tak naprawde powinien to być dtos
+    public ProductDto saveProduct(ProductDto productDto){
 
-        Product product = new Product(productDto);
-        return productRepository.save(product);
+        Product persistedProduct = productRepository.save(new Product(productDto));
+        return new ProductDto(persistedProduct);
     }
 
     public void deleteProduct(Long id) {

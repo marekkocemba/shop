@@ -11,7 +11,7 @@ public class ProductDto {
     private Long id;
     private String title;
     private String description;
-    private Double price;
+    private String price;
     private ProductUnitEnum unit;
     private String mainPhoto;
 
@@ -19,7 +19,7 @@ public class ProductDto {
         this.id = product.getId();
         this.title = product.getTitle();
         this.description = product.getDescription();
-        this.price = product.getPrice();
+        this.price = product.getPrice().toString();
         this.unit = product.getUnit();
         this.mainPhoto = product.getMainPhoto();
     }
@@ -51,14 +51,6 @@ public class ProductDto {
         this.description = description;
     }
 
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
     public String getMainPhoto() {
         return mainPhoto;
     }
@@ -73,5 +65,13 @@ public class ProductDto {
 
     public void setUnit(ProductUnitEnum unit) {
         this.unit = unit;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 }
