@@ -1,5 +1,6 @@
 package pl.cz.shop.entity;
 
+import pl.cz.shop.dto.ProductDto;
 import pl.cz.shop.enums.ProductUnitEnum;
 
 import javax.persistence.*;
@@ -20,6 +21,18 @@ public class Product {
     private ProductUnitEnum unit;
     @Column(name = "main_photo")
     private String mainPhoto;
+
+    public Product(ProductDto productDto) {
+        this.id = productDto.getId();
+        this.title = productDto.getTitle();
+        this.description = productDto.getDescription();
+        this.price = productDto.getPrice();
+        this.unit = productDto.getUnit();
+        this.mainPhoto = productDto.getMainPhoto();
+    }
+
+    public Product() {
+    }
 
     public Long getId() {
         return id;

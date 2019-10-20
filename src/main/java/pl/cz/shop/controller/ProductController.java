@@ -9,6 +9,7 @@ import pl.cz.shop.dto.ProductDto;
 import pl.cz.shop.entity.Product;
 import pl.cz.shop.enums.ProductUnitEnum;
 import pl.cz.shop.service.ProductService;
+import pl.cz.shop.validator.ProductValidator;
 
 import javax.validation.Valid;
 
@@ -21,6 +22,7 @@ public class ProductController {
     // Odp: Przez pole, konstruktor i metode
 
     private ProductService productService;
+    private ProductValidator productValidator;
 
     //@Autowired nie jest to potrzebne
     public ProductController(ProductService productService) {
@@ -46,7 +48,7 @@ public class ProductController {
     @GetMapping("/products/form/create")
     private String getProductForm(Model model){
 
-        model.addAttribute("product", new Product());
+        model.addAttribute("product", new ProductDto());
         model.addAttribute("unitEnums", ProductUnitEnum.values());
 
         return "product_form_create";
@@ -62,16 +64,19 @@ public class ProductController {
     }
 
     @PostMapping("/products")
-    private String saveProduct(@ModelAttribute("product") Product product,
-            Model model){
-        try {
-            productService.saveProduct(product);
-            model.addAttribute("naszaListaProduktow", productService.getProducts());
-            return "product_list";
-        }catch (Exception e){
-            model.addAttribute("product", product);
-            return "product_form";
+    private String saveProduct(@ModelAttribute("product") ProductDto productDto,
+            Model model, BindingResult result) {
+        if (productDto != null) {
+            productValidator.validate(productDto, result);
         }
+
+        if (result.hasErrors()) {
+            return "product_form_create";
+        }
+        productService.saveProduct(productDto);
+        model.addAttribute("naszaListaProduktow", productService.getProducts());
+        return "product_list";
+
     }
 
     @GetMapping("products-delete/{id}")

@@ -1,6 +1,7 @@
 package pl.cz.shop.service;
 
 import org.springframework.stereotype.Service;
+import pl.cz.shop.dto.ProductDto;
 import pl.cz.shop.entity.Product;
 import pl.cz.shop.repository.ProductRepository;
 
@@ -30,8 +31,10 @@ public class ProductService {
         );
     }
 
-    public Product saveProduct(Product product){
+    public Product saveProduct(ProductDto productDto){
         //tak naprawde powinien to być dtos
+
+        Product product = new Product(productDto);
         return productRepository.save(product);
     }
 

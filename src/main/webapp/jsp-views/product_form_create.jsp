@@ -21,6 +21,7 @@
                 <tr>
                     <td><form:label path="title">Nazwa produktu</form:label></td>
                     <td><form:input path="title"/></td>
+                    <td class='error'><form:errors path="title"/></td>
                 </tr>
                 <tr>
                     <td><form:label path="description">Opis produktu</form:label></td>
@@ -33,6 +34,7 @@
                 <tr>
                     <td><form:label path="price">Cena</form:label></td>
                     <td><form:input path="price"/></td>
+                    <td class='error'><form:errors path="price"/></td>
                 </tr>
                 <tr>
                     <td><form:label path="unit">Jednostka</form:label></td>
@@ -44,6 +46,7 @@
                             </c:forEach>
                         </form:select>
                      </td>
+                     <td class='error'><form:errors path="unit"/></td>
                 </tr>
                 <tr>
                 	<td></td>

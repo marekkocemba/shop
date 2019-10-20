@@ -1,5 +1,6 @@
 package pl.cz.shop.dto;
 
+import pl.cz.shop.entity.Product;
 import pl.cz.shop.enums.ProductUnitEnum;
 
 import javax.persistence.*;
@@ -13,6 +14,18 @@ public class ProductDto {
     private Double price;
     private ProductUnitEnum unit;
     private String mainPhoto;
+
+    public ProductDto(Product product) {
+        this.id = product.getId();
+        this.title = product.getTitle();
+        this.description = product.getDescription();
+        this.price = product.getPrice();
+        this.unit = product.getUnit();
+        this.mainPhoto = product.getMainPhoto();
+    }
+
+    public ProductDto() {
+    }
 
     public Long getId() {
         return id;
