@@ -1,5 +1,6 @@
 package pl.cz.shop.dto;
 
+import pl.cz.shop.entity.Commentary;
 import pl.cz.shop.entity.User;
 
 import javax.persistence.*;
@@ -11,6 +12,14 @@ public class CommentaryDto {
     private String text;
     private LocalDateTime publishDate;
     private User user;
+
+    public CommentaryDto(Commentary commentary) {
+        this.id = commentary.getId();
+        this.text = commentary.getText();
+        this.publishDate = getPublishDate();
+    }
+    public CommentaryDto() {
+    }
 
     public Long getId() {
         return id;
