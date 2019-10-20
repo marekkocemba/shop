@@ -16,8 +16,9 @@ public class CommentaryDto {
     public CommentaryDto(Commentary commentary) {
         this.id = commentary.getId();
         this.text = commentary.getText();
-        this.publishDate = getPublishDate();
+        this.publishDate = commentary.getPublishDate();
     }
+
     public CommentaryDto() {
     }
 

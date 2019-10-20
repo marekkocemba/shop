@@ -20,5 +20,24 @@ public class ProductValidator implements Validator {
     public void validate(Object object, Errors errors) {
         ProductDto productDto = (ProductDto) object;
 
+        if(productDto.getTitle().trim().length() < 3){
+            errors.rejectValue("title", null, "title should be at least 3 characters");
+        }
+
+
+        try{
+            Double x =Double.parseDouble(productDto.getPrice());
+            if(x <= 0){
+                errors.rejectValue("price", null, "price should be greater than zero");
+            }
+        }catch (Exception e){
+            errors.rejectValue("price", null, "invalid price");
+        }
+
+        if(productDto.getUnit() == null){
+            errors.rejectValue("unit", null, "unit shouldd be not null");
+        }
+        // cena , musi byc dodatnia, czy jest liczba
+        // musi byc wybrana jednostka
     }
 }

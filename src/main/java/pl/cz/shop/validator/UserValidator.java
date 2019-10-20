@@ -4,9 +4,20 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import pl.cz.shop.dto.UserDto;
+import pl.cz.shop.entity.User;
+import pl.cz.shop.repository.UserRepository;
+
+import java.util.Optional;
 
 @Component
 public class UserValidator implements Validator {
+
+    private final UserRepository userRepository;
+
+    //Autowired
+    public UserValidator(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public boolean supports(Class<?> clazz) {
@@ -22,12 +33,39 @@ public class UserValidator implements Validator {
             errors.rejectValue("email", null, "email should not be empty");
         }
         //prawidlowy email
+        else if(!userDto.getEmail().contains("@") || !userDto.getEmail().contains(".")){
+            errors.rejectValue("email", null, "invalid email");
+        }
+
+        //Mój dług
+
+//        Optional<User> user = userRepository.findByEmail(userDto.getEmail());
+//
+//        if(userRepository.findByEmail(userDto.getEmail()).isPresent()){
+//            errors.rejectValue("email", null, "email already exist");
+//        }
 
         //haslo (min 3 znakow)
-
+        if(userDto.getPassword().trim().length() < 3){
+            errors.rejectValue("password", null, "password should be at least 3 characters");
+        }
         //haslo == powtorzone haslo
+        if(!userDto.getPassword().equals(userDto.getRepeatPassword())) {
+            errors.rejectValue("password", null, "password should be the same");
+        }
 
-        //    errors.rejectValue("password", null, "passwords are different");
+        if(userDto.getTelephone().trim().length() < 9){
+            errors.rejectValue("telephone", null, "telephone should be at least 9 characters");
+        }
+
+        if(userDto.getAddress().trim().length() < 11){
+            errors.rejectValue("address", null, "address should be at least 11 characters");
+        }
+
+
+   //2 nowe ify jeden telefon min 9 znakow uzyc trim()
+        // address trim() min 11 znakow
+
 
     }
 }

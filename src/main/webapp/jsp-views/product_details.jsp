@@ -19,5 +19,18 @@
         </div>
         <a href="/products/form/${product.id}">Edytuj produkt</a>
         <a href="/products-delete/${product.id}">Usuń produkt</a>
+        <c:choose>
+        <c:when test = "${not empty product.commentaryList}">
+                    <c:forEach items="${product.commentaryList}" var="commentaryElement">
+                    <div id="container">
+                    Tekst komentarza: ${commentaryElement.text}
+                    Data publikacji: ${commentaryElement.publishDate}
+                    </div>
+                    </c:forEach>
+        </c:when>
+        <c:otherwise>
+        <h3>Brak komentarzy</h3>
+        </c:otherwise>
+        </c:choose>
     </body>
 </html>
